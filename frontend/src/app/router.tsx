@@ -4,14 +4,11 @@ import { RootLayout } from '@/pages/layouts/RootLayout';
 import { LoadingSpinner } from '@/core/components/LoadingSpinner';
 
 const HomePage = lazy(() => import('@/pages/Home'));
+const GradesPage = lazy(() => import('@/pages/Grades'));
+const GradeOverviewPage = lazy(() => import('@/pages/GradeOverview'));
+const SubjectGradesPage = lazy(() => import('@/pages/SubjectGrades'));
 const NotFoundPage = lazy(() => import('@/pages/NotFound'));
 
-/**
- * @router AppRouter
- * @summary Main application routing configuration with lazy loading
- * @type router-configuration
- * @category navigation
- */
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -22,6 +19,30 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingSpinner />}>
             <HomePage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'grades',
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <GradesPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'grades/overview',
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <GradeOverviewPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'grades/subject/:subject',
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <SubjectGradesPage />
           </Suspense>
         ),
       },
@@ -37,10 +58,6 @@ export const router = createBrowserRouter([
   },
 ]);
 
-/**
- * @component AppRouter
- * @summary Router provider component that wraps the entire application
- */
 export const AppRouter = () => {
   return <RouterProvider router={router} />;
 };
